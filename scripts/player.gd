@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @export var collision_shape : CollisionShape2D
 
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 
@@ -13,6 +15,12 @@ var gravity = 980
 
 func _physics_process(delta):
 	# Add the gravity.
+	
+	if velocity.x < 0:
+		animated_sprite_2d.flip_h = true
+	elif velocity.x > 0:
+		animated_sprite_2d.flip_h = false
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -27,5 +35,5 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	print(velocity.y)
+	
 	move_and_slide()

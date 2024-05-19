@@ -8,7 +8,6 @@ func _on_body_entered(body):
 		await body.collision_shape.tree_exited
 		body.gravity = 0
 		body.velocity.y = 200
-		body.velocity.x = 0
 		timer.start()
 
 func _on_timer_timeout():
