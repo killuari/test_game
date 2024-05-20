@@ -42,10 +42,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_roxjh"]
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("collision_shape")]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_y4mt7")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
