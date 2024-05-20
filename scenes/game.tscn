@@ -1,14 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn2wcf10es81q"]
+[gd_scene load_steps=14 format=3 uid="uid://dn2wcf10es81q"]
 
 [ext_resource type="PackedScene" uid="uid://bu3o3f7ufi8fq" path="res://scenes/player.tscn" id="1_r8234"]
-[ext_resource type="Texture2D" uid="uid://qei5fkb45f5j" path="res://assets/sprites/world_tileset.png" id="2_5nk46"]
 [ext_resource type="PackedScene" uid="uid://bxdpobuieiclh" path="res://scenes/platform.tscn" id="3_lnkmd"]
+[ext_resource type="PackedScene" uid="uid://cuyii6obbmslu" path="res://scenes/checkpoint.tscn" id="3_vn7rw"]
 [ext_resource type="PackedScene" uid="uid://bq73adq8jkp5m" path="res://scenes/coin.tscn" id="4_qdu04"]
 [ext_resource type="PackedScene" uid="uid://c0rv1cpolewn4" path="res://scenes/killzone.tscn" id="5_vkgkf"]
 [ext_resource type="PackedScene" uid="uid://djkmh2410vb4" path="res://scenes/slime.tscn" id="6_fmiok"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bl0v0"]
+load_path = "res://.godot/imported/world_tileset.png-61a32465f33c3d9d3bfecb75b6485009.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q7ru4"]
-texture = ExtResource("2_5nk46")
+texture = SubResource("CompressedTexture2D_bl0v0")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -470,6 +473,11 @@ position_smoothing_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(101, 124)
 shape = SubResource("WorldBoundaryShape2D_y6008")
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
+position = Vector2(328, 25)
 
 [node name="Coins" type="Node" parent="."]
 
