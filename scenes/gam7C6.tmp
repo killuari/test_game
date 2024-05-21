@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dn2wcf10es81q"]
+[gd_scene load_steps=14 format=3 uid="uid://dn2wcf10es81q"]
 
 [ext_resource type="PackedScene" uid="uid://bu3o3f7ufi8fq" path="res://scenes/player.tscn" id="1_r8234"]
 [ext_resource type="PackedScene" uid="uid://bxdpobuieiclh" path="res://scenes/platform.tscn" id="3_lnkmd"]
 [ext_resource type="PackedScene" uid="uid://cuyii6obbmslu" path="res://scenes/checkpoint.tscn" id="3_vn7rw"]
-[ext_resource type="Script" path="res://scripts/checkpoints_parent.gd" id="3_w82w5"]
 [ext_resource type="PackedScene" uid="uid://bq73adq8jkp5m" path="res://scenes/coin.tscn" id="4_qdu04"]
 [ext_resource type="PackedScene" uid="uid://c0rv1cpolewn4" path="res://scenes/killzone.tscn" id="5_vkgkf"]
 [ext_resource type="PackedScene" uid="uid://djkmh2410vb4" path="res://scenes/slime.tscn" id="6_fmiok"]
@@ -476,13 +475,9 @@ position = Vector2(101, 124)
 shape = SubResource("WorldBoundaryShape2D_y6008")
 
 [node name="Checkpoints" type="Node" parent="."]
-script = ExtResource("3_w82w5")
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(328, 25)
-
-[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
-position = Vector2(216, 73)
 
 [node name="Coins" type="Node" parent="."]
 
@@ -513,5 +508,3 @@ position = Vector2(73, 80)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("6_fmiok")]
 position = Vector2(232, 16)
-
-[connection signal="child_exiting_tree" from="Checkpoints" to="Checkpoints" method="_on_child_exiting_tree"]

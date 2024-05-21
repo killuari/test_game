@@ -9,6 +9,7 @@ func _on_body_entered(body):
 		body.gravity = 0
 		body.velocity.y = 200
 		timer.start()
+		await timer.timeout
+		body.dead = true
 
-func _on_timer_timeout():
-	get_tree().reload_current_scene()
+

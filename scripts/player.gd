@@ -11,7 +11,7 @@ const JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 980
-
+var dead = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -37,3 +37,10 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	move_and_slide()
+	
+	if dead:
+		print("jetzt")
+		get_tree().reload_current_scene()
+
+func respawn():
+	pass
