@@ -7,14 +7,14 @@ var active_checkpoint_pos : Vector2
 func _ready():
 	for checkpoint in get_children():
 		checkpoint.checkpoint_entered.connect(new_checkpoint)
-	if player.dead == true:
-		print("tot")
 	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if player.dead == true:
+		print("tot")
+	
 
 func new_checkpoint(pos : Vector2):
 	active_checkpoint_pos = pos

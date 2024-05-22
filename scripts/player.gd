@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var collision_shape : CollisionShape2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var checkpoints = $"../Checkpoints"
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
@@ -40,7 +41,9 @@ func _physics_process(delta):
 	
 	if dead:
 		print("jetzt")
-		get_tree().reload_current_scene()
+		global_position = checkpoints.active_checkpoint_pos
+		dead = false
+		
 
 func respawn():
 	pass
