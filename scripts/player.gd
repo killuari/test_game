@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var checkpoints = $"../Checkpoints"
+@onready var camera_2d = $Camera2D
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
@@ -13,6 +14,11 @@ const JUMP_VELOCITY = -300.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 980
 var dead = false
+
+func _ready():
+	Global.player = self
+	camera_2d.enabled = false
+	camera_2d.position_smoothing_enabled = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -41,9 +47,15 @@ func _physics_process(delta):
 	
 	if dead:
 		print("jetzt")
-		global_position = checkpoints.active_checkpoint_pos
 		dead = false
+		respawn()
 		
+		
+func spawn(pos: Vector2):
+	global_position = pos
+	camera_2d.enabled = true
+	camera_2d.position_smoothing_enabled = true
 
 func respawn():
-	pass
+	get_tree().reload_current_scene()
+
