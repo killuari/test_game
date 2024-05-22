@@ -13,7 +13,6 @@ func _on_checkzone_body_entered(body):
 		active = true
 		checkpoint_entered.emit(global_position)
 
-func respawn():
-	pass
+
 
 

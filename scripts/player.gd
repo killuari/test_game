@@ -46,7 +46,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if dead:
-		print("jetzt")
 		dead = false
 		respawn()
 		

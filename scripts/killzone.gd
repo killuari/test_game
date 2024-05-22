@@ -4,7 +4,7 @@ extends Area2D
 
 func _on_body_entered(body):
 	if body is Player:
-		body.collision_shape.disabled = true
+		body.collision_shape.queue_free()
 		timer.start()
 
 
