@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dn2wcf10es81q"]
+[gd_scene load_steps=22 format=3 uid="uid://dn2wcf10es81q"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_nu0af"]
 [ext_resource type="PackedScene" uid="uid://bu3o3f7ufi8fq" path="res://scenes/player.tscn" id="1_r8234"]
@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://bq73adq8jkp5m" path="res://scenes/coin.tscn" id="4_qdu04"]
 [ext_resource type="PackedScene" uid="uid://c0rv1cpolewn4" path="res://scenes/killzone.tscn" id="5_vkgkf"]
 [ext_resource type="PackedScene" uid="uid://djkmh2410vb4" path="res://scenes/slime.tscn" id="6_fmiok"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="9_i4wfr"]
+[ext_resource type="Script" path="res://scripts/IdlePlayerState.gd" id="10_3y7va"]
+[ext_resource type="Script" path="res://scripts/RunningPlayerState.gd" id="11_h2iq7"]
+[ext_resource type="Script" path="res://scripts/FallingPlayerState.gd" id="12_6lkgw"]
+[ext_resource type="Script" path="res://scripts/DeathPlayerState.gd" id="13_1x2iu"]
+[ext_resource type="Script" path="res://scripts/JumpingPlayerState.gd" id="13_4s022"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bl0v0"]
 load_path = "res://.godot/imported/world_tileset.png-61a32465f33c3d9d3bfecb75b6485009.ctex"
@@ -478,11 +484,20 @@ position_smoothing_enabled = true
 position = Vector2(101, 124)
 shape = SubResource("WorldBoundaryShape2D_y6008")
 
+[node name="CPTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
 [node name="Checkpoints" type="Node" parent="."]
 script = ExtResource("3_w82w5")
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(328, 25)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
+position = Vector2(75, -40)
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(216, 73)
@@ -491,12 +506,28 @@ position = Vector2(216, 73)
 position = Vector2(680, -87)
 
 [node name="Coins" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Coin" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(136, 74)
 
+[node name="Coin7" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(57, -22)
+
 [node name="Coin2" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(200, 74)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(67, 74)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(200, -22)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(296, 26)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(584, -101)
 
 [node name="Platforms" type="Node" parent="."]
 
@@ -521,12 +552,37 @@ position = Vector2(520, -46)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_fmiok")]
-position = Vector2(73, 80)
+position = Vector2(40, 80)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("6_fmiok")]
-position = Vector2(232, 16)
-
-[node name="Slime3" parent="Enemies" instance=ExtResource("6_fmiok")]
 position = Vector2(616, -80)
 
+[node name="Slime3" parent="Enemies" instance=ExtResource("6_fmiok")]
+position = Vector2(548, 48)
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("9_i4wfr")
+CURRENT_STATE = NodePath("IdlePlayerState")
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("10_3y7va")
+
+[node name="RunningPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("11_h2iq7")
+
+[node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("12_6lkgw")
+
+[node name="DeathPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("13_1x2iu")
+
+[node name="Timer" type="Timer" parent="PlayerStateMachine/DeathPlayerState"]
+process_callback = 0
+one_shot = true
+
+[node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("13_4s022")
+
+[connection signal="timeout" from="CPTimer" to="Checkpoints" method="_on_cp_timer_timeout"]
 [connection signal="child_exiting_tree" from="Checkpoints" to="Checkpoints" method="_on_child_exiting_tree"]
+[connection signal="timeout" from="PlayerStateMachine/DeathPlayerState/Timer" to="PlayerStateMachine/DeathPlayerState" method="_on_timer_timeout"]
