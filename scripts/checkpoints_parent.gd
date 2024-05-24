@@ -17,6 +17,8 @@ func new_checkpoint(pos : Vector2):
 		if is_instance_valid(coin):
 			Global.coins_collected.append(coins.get_children().find(coin))
 			coin.queue_free()
+		else:
+			print("coin not valid anymore")
 		
 	Global.coins_collected_since_last_checkpoint = []
 
