@@ -490,6 +490,9 @@ script = ExtResource("3_w82w5")
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(328, 25)
 
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
+position = Vector2(75, -40)
+
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(216, 73)
 
@@ -497,12 +500,28 @@ position = Vector2(216, 73)
 position = Vector2(680, -87)
 
 [node name="Coins" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Coin" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(136, 74)
 
+[node name="Coin7" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(55, -22)
+
 [node name="Coin2" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(200, 74)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(67, 74)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(194, -22)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(299, 26)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(583, -102)
 
 [node name="Platforms" type="Node" parent="."]
 
@@ -527,13 +546,13 @@ position = Vector2(520, -46)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_fmiok")]
-position = Vector2(73, 80)
+position = Vector2(524, 49)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("6_fmiok")]
-position = Vector2(232, 16)
+position = Vector2(494, 31)
 
 [node name="Slime3" parent="Enemies" instance=ExtResource("6_fmiok")]
-position = Vector2(616, -80)
+position = Vector2(548, 48)
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("9_i4wfr")
