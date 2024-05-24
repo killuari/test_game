@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dn2wcf10es81q"]
+[gd_scene load_steps=22 format=3 uid="uid://dn2wcf10es81q"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_nu0af"]
 [ext_resource type="PackedScene" uid="uid://bu3o3f7ufi8fq" path="res://scenes/player.tscn" id="1_r8234"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="9_i4wfr"]
 [ext_resource type="Script" path="res://scripts/IdlePlayerState.gd" id="10_3y7va"]
 [ext_resource type="Script" path="res://scripts/RunningPlayerState.gd" id="11_h2iq7"]
+[ext_resource type="Script" path="res://scripts/FallingPlayerState.gd" id="12_6lkgw"]
+[ext_resource type="Script" path="res://scripts/DeathPlayerState.gd" id="13_1x2iu"]
+[ext_resource type="Script" path="res://scripts/JumpingPlayerState.gd" id="13_4s022"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bl0v0"]
 load_path = "res://.godot/imported/world_tileset.png-61a32465f33c3d9d3bfecb75b6485009.ctex"
@@ -543,9 +546,15 @@ script = ExtResource("10_3y7va")
 script = ExtResource("11_h2iq7")
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("12_6lkgw")
 
 [node name="DeathPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("13_1x2iu")
+
+[node name="Timer" type="Timer" parent="PlayerStateMachine/DeathPlayerState"]
 
 [node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("13_4s022")
 
 [connection signal="child_exiting_tree" from="Checkpoints" to="Checkpoints" method="_on_child_exiting_tree"]
+[connection signal="timeout" from="PlayerStateMachine/DeathPlayerState/Timer" to="PlayerStateMachine/DeathPlayerState" method="_on_timer_timeout"]

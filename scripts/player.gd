@@ -45,9 +45,8 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if dead:
-		dead = false
-		respawn()
+	
+		
 		
 		
 func spawn(pos: Vector2):

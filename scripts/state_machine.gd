@@ -16,6 +16,7 @@ func _ready():
 
 func _process(delta):
 	CURRENT_STATE.update(delta)
+	print(CURRENT_STATE)
 
 func _physics_process(delta):
 	CURRENT_STATE.physics_update(delta)
