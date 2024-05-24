@@ -11,6 +11,5 @@ func _ready():
 		pass
 
 func _on_body_entered(body):
-	animated_sprite_2d.queue_free()
-	collision_shape_2d.disabled = true
+	queue_free()
 	
