@@ -14,6 +14,7 @@ func _on_body_entered(body):
 	if not collected:
 		collect()
 		Global.coins_collected_since_last_checkpoint.append(self)
+		Global.score += 1
 	
 	
 func collect():

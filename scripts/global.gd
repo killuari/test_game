@@ -1,6 +1,7 @@
 extends Node
 
 var player
+var score : int
 
 var spawn_position : Vector2
 

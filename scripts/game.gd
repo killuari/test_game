@@ -5,9 +5,10 @@ extends Node2D
 
 
 func _ready():
+	var count = 0
 	player.spawn(Global.spawn_position)
-	
 	for coin in Global.coins_collected:
+		count += 1
 		print(coins.get_children()[coin].name)
 		coins.get_children()[coin].collect()
 

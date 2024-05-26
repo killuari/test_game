@@ -22,5 +22,6 @@ func _on_cp_timer_timeout():
 			coin.queue_free()
 		else:
 			print("coin not valid anymore")
+			Global.score -= 1
 		
 	Global.coins_collected_since_last_checkpoint = []

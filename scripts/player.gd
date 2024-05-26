@@ -14,6 +14,7 @@ const JUMP_VELOCITY = -300.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 980
 var dead = false
+var score : int
 
 func _ready():
 	Global.player = self
@@ -53,6 +54,7 @@ func spawn(pos: Vector2):
 	global_position = pos
 	camera_2d.enabled = true
 	camera_2d.position_smoothing_enabled = true
+	print(Global.score)
 
 func respawn():
 	get_tree().reload_current_scene()
