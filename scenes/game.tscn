@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dn2wcf10es81q"]
+[gd_scene load_steps=24 format=3 uid="uid://dn2wcf10es81q"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_nu0af"]
 [ext_resource type="PackedScene" uid="uid://bu3o3f7ufi8fq" path="res://scenes/player.tscn" id="1_r8234"]
@@ -420,6 +420,12 @@ texture = SubResource("CompressedTexture2D_bl0v0")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_q7ru4")
 
+[sub_resource type="SystemFont" id="SystemFont_n25wb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yh11f"]
+font = SubResource("SystemFont_n25wb")
+font_color = Color(1, 1, 0, 1)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y6008"]
 
 [sub_resource type="Animation" id="Animation_ob6h0"]
@@ -478,6 +484,14 @@ zoom = Vector2(4, 4)
 limit_bottom = 150
 position_smoothing_enabled = true
 
+[node name="ScoreLabel" type="Label" parent="Player/Camera2D"]
+offset_left = 111.0
+offset_top = -79.0
+offset_right = 142.0
+offset_bottom = -56.0
+label_settings = SubResource("LabelSettings_yh11f")
+horizontal_alignment = 2
+
 [node name="Killzone" parent="." instance=ExtResource("5_vkgkf")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
@@ -487,7 +501,7 @@ shape = SubResource("WorldBoundaryShape2D_y6008")
 [node name="CPTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 process_callback = 0
-wait_time = 0.5
+wait_time = 0.1
 one_shot = true
 
 [node name="Checkpoints" type="Node" parent="."]
@@ -496,23 +510,20 @@ script = ExtResource("3_w82w5")
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(328, 25)
 
-[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
-position = Vector2(75, -40)
-
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(216, 73)
 
 [node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
 position = Vector2(680, -87)
 
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("3_vn7rw")]
+position = Vector2(-1, -3)
+
 [node name="Coins" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Coin" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(136, 74)
-
-[node name="Coin7" parent="Coins" instance=ExtResource("4_qdu04")]
-position = Vector2(57, -22)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(200, 74)
@@ -528,6 +539,9 @@ position = Vector2(296, 26)
 
 [node name="Coin6" parent="Coins" instance=ExtResource("4_qdu04")]
 position = Vector2(584, -101)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("4_qdu04")]
+position = Vector2(56, -22)
 
 [node name="Platforms" type="Node" parent="."]
 

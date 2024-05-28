@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export var collision_shape : CollisionShape2D
 
+@onready var score_label = $Camera2D/ScoreLabel
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var checkpoints = $"../Checkpoints"
 @onready var camera_2d = $Camera2D
@@ -46,6 +47,7 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
+	score_label.text = str(Global.score)
 	
 		
 		
@@ -54,7 +56,8 @@ func spawn(pos: Vector2):
 	global_position = pos
 	camera_2d.enabled = true
 	camera_2d.position_smoothing_enabled = true
-	print(Global.score)
+	
+
 
 func respawn():
 	get_tree().reload_current_scene()
